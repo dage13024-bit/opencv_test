@@ -2,4 +2,4 @@
 2.test_camara是为了测试摄像头是否可用
 3.red_extract是为了转换提取处理红色部分
 4.detect_red是为了画框并计算中心坐标
-5.armor_detection是为了做灯条检测
+5.armor_detection是为了做灯条检测    
