@@ -76,7 +76,7 @@ while True:
 
     # 显示结果：左边原图带框，右边是黑白面具
     cv2.imshow("Detection Result", frame)
-    # cv2.imshow("Red Mask", mask)
+    cv2.imshow("Red Mask", mask)
 
     # 按 q 退出
     if cv2.waitKey(1) & 0xFF == ord('q'):
