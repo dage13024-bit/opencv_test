@@ -4,7 +4,7 @@ import numpy as np  # 专门用来处理数组
 cap = cv2.VideoCapture(0)
 
 while True:
-    ret, frame = cap.read()
+    ret, frame = cap.read()#ret表示是否成功读取帧，frame是当前帧的图像数据
     if not ret:
         break
 
@@ -15,15 +15,15 @@ while True:
     # 区间1：浅红到正红（0~10）
     lower_red1 = np.array([0, 100, 100])
     upper_red1 = np.array([10, 255, 255])
-    mask1 = cv2.inRange(hsv, lower_red1, upper_red1)
+    mask1 = cv2.inRange(hsv, lower_red1, upper_red1)#cv2.inRange()：阈值化函数，将 hsv 图像中每个像素与下界、上界比较，若三个通道都在范围内则设为 255（白色），否则设为 0（黑色），返回二值掩膜 mask1。
 
     # 区间2：紫红到深红（170~180）
     lower_red2 = np.array([170, 100, 100])
     upper_red2 = np.array([180, 255, 255])
-    mask2 = cv2.inRange(hsv, lower_red2, upper_red2)
+    mask2 = cv2.inRange(hsv, lower_red2, upper_red2)#cv2.inRange()：阈值化函数，将 hsv 图像中每个像素与下界、上界比较，若三个通道都在范围内则设为 255（白色），否则设为 0（黑色），返回二值掩膜 mask2: 表示第二个红色区间的掩膜。
 
     # 将两个区间合并成一个“红色面具”
-    mask = cv2.bitwise_or(mask1, mask2)
+    mask = cv2.bitwise_or(mask1, mask2)#cv2.bitwise_or()：按位或操作，将两个掩膜合并，结果为红色区域的并集。
 
     # 显示原画面和面具（白色=红色区域，黑色=其他）
     cv2.imshow("Original", frame)
@@ -33,5 +33,5 @@ while True:
     if cv2.waitKey(1) & 0xFF == ord('q'):
         break
 
-cap.release()
-cv2.destroyAllWindows()
+cap.release() #释放摄像头
+cv2.destroyAllWindows()  # 关闭所有OpenCV窗口
