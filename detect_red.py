@@ -22,11 +22,18 @@ while True:
     # 2. 查找所有白色区域的轮廓（外轮廓）
     contours, _ = cv2.findContours(mask, cv2.RETR_EXTERNAL, cv2.CHAIN_APPROX_SIMPLE)
 
+# contours, _：两个返回值。contours 是一个列表，每个元素是一个轮廓（由点组成的 NumPy 数组）；
+# _ 是第二个返回值（层次结构），用下划线表示忽略。
+# cv2.findContours()：从二值图像中查找轮廓。
+# 第一个参数 mask：输入的二值图像（白色为前景）。
+# 第二个参数 cv2.RETR_EXTERNAL：轮廓检索模式，只检测最外层轮廓，忽略内部嵌套。
+# 第三个参数 cv2.CHAIN_APPROX_SIMPLE：轮廓近似方法，压缩水平、垂直和对角线段，仅保留端点，节省内存。
+
     # 3. 遍历每一个找到的轮廓
     for cnt in contours:
         # 计算轮廓面积，过滤掉太小的噪点（比如只有几个像素的白点）
         area = cv2.contourArea(cnt)
-        if area > 500:  # 这个数值可以调，太小则忽略
+        if area > 100:  # 这个数值可以调，太小则忽略
             # 4. 获取包围该轮廓的矩形框（x, y, 宽, 高）
             x, y, w, h = cv2.boundingRect(cnt)
 
